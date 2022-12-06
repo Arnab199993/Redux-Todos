@@ -14,9 +14,11 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import FolderIcon from '@mui/icons-material/Folder';
 import DeleteIcon from '@mui/icons-material/Delete';
+import BrushIcon from '@mui/icons-material/Brush';
 import Avatar from '@mui/material/Avatar';
 import { useSelector,useDispatch } from 'react-redux';
 import {deleteTodo} from "../slices/todo";
+import moment from 'moment';
 
 
 
@@ -38,6 +40,16 @@ const Show = (props) => {
 
     }
 
+    const checkIfDateISPAssed=(date)=>{
+
+     // moment() --->it will provide you current date and time
+
+
+     return moment().diff(date, 'days')>0 ?true :false;
+
+
+    }
+
     const todo=useSelector(state=>state.todo)
   return (
 
@@ -48,23 +60,30 @@ const Show = (props) => {
           <Demo>
             <List dense={dense}>
 
-              {todo.todos.map(ele=>(
+              {todo.todos.map((ele,i)=>(
                 <ListItem
                 key={ele.id}
                 secondaryAction={
-                  <IconButton edge="end" aria-label="delete"  onClick={()=>deleteData(ele.id)}>
-                    <DeleteIcon />
-                  </IconButton>
+                  <>  <IconButton edge="end" aria-label="delete"  onClick={()=>deleteData(i)}>
+                  <DeleteIcon />
+                </IconButton>
+                  <IconButton edge="end" aria-label="delete"  onClick={()=>props.handleModalOpen(ele)}>
+                  <BrushIcon />
+                </IconButton></>
+                
                 }
               >
                 <ListItemAvatar>
                   <Avatar>
                     <FolderIcon />
                   </Avatar>
+              
                 </ListItemAvatar>
                 <ListItemText
-                  primary={ele.name}
-                  secondary={secondary ? 'Secondary text' : null}
+               
+                  primary={checkIfDateISPAssed(ele.date)?`${ele.name} -Due Date PAssed`:ele.name}
+                  secondary={secondary ? 'Secondary text' : <span style={{ textDecoration: ele.isCompleted? 'line-through': 'none'}}
+                  >{ele.date}</span>}
                 />
               </ListItem>
 
