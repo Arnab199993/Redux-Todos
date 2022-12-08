@@ -10,9 +10,6 @@ import Stack from '@mui/material/Stack';
 import {EditData, handleemptyState} from "../slices/todo";
 import { useDispatch,useSelector } from 'react-redux';
 
-import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 
 const style = {
@@ -71,24 +68,9 @@ export default function EditModal(props) {
       >
         <Box sx={style}>
         <div style={{marginLeft:"20px"}}>
-
-
-<LocalizationProvider dateAdapter={AdapterDayjs}>
-<Stack spacing={4}  style={{marginTop:"20px"}}>
-<TextField id="outlined-basic" label="Todo" variant="outlined" value={state.name.length>0?state.name:todoData.editData.name}  onChange={handleChange}/> <br></br>
-<DesktopDatePicker
- 
-
-          label="End Date"
-          inputFormat="YYYY-MM-DD"
-          value={state.date.length>0?state.date.length:todoData.editData.date}
-          onChange={handleDateChange}
-          renderInput={(params) => <TextField {...params} />}
-        /> 
-  </Stack>
-
-
-</LocalizationProvider><br></br>
+        <Stack spacing={4}  style={{marginTop:"20px"}}/>
+        <TextField id="outlined-basic" label="Todo" variant="outlined" value={state.name.length>0?state.name:todoData.editData.name}  onChange={handleChange}/> <br></br>
+       
 
 
 <Button variant="contained" style={{marginTop:"20px"}} onClick={ediDirectlyIntheStore}>Edit Todo</Button>

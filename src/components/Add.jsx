@@ -8,9 +8,7 @@ import Stack from '@mui/material/Stack';
 import {handleemptyState} from "../slices/todo";
 import { useDispatch,useSelector } from 'react-redux';
 
-import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+
 
 
 
@@ -47,22 +45,14 @@ const Add = (props) => {
     <div style={{marginLeft:"20px"}}>
 
 
-<LocalizationProvider dateAdapter={AdapterDayjs}>
+
 <Stack spacing={4}  style={{marginTop:"20px"}}>
 <TextField id="outlined-basic" label="Todo" variant="outlined"  onChange={handleChange}/> <br></br>
-<DesktopDatePicker
- 
 
-          label="End Date"
-          inputFormat="YYYY-MM-DD"
-          value={stateData.emptyState.date}
-          onChange={handleDateChange}
-          renderInput={(params) => <TextField {...params} />}
-        /> 
   </Stack>
 
 
-</LocalizationProvider><br></br>
+
 
 
 <Button variant="contained" style={{marginTop:"20px"}} onClick={()=>props.addtodoEvent(state)}>Add todo</Button>
